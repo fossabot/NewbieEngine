@@ -13,3 +13,6 @@ CTestTestfile.cmake
 [Bb]uild/
 [Bb]uilds/
 CMakeBuild/
+
+# Exclude Visual Studio Code related
+.vscode
