@@ -1,0 +1,7 @@
+# Newbie engine modules
+
+NB_MACRO_GET_SUBDIRECTOYIES(${CMAKE_CURRENT_SOURCE_DIR} SUBDIRS)
+
+FOREACH(SUBDIR ${SUBDIRS})
+    add_subdirectory(${SUBDIR})
+ENDFOREACH()
