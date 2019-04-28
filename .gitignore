@@ -1,3 +1,5 @@
+# .gitignore for Newbie engine
+
 # Exclude CMake temp files
 CMakeCache.txt
 CMakeFiles
@@ -16,3 +18,8 @@ CMakeBuild/
 
 # Exclude Visual Studio Code related
 .vscode
+
+# Exclude external module files except cmake related
+modules/external/*
+!modules/external/CMakeLists.txt
+!modules/external/*.cmake
