@@ -29,3 +29,9 @@ NB_FUNC_GROUP_SOURCE("${NB_CURRENT_BUILD_HEADERS_SOURCES}" "${CMAKE_CURRENT_LIST
 # Add library
 add_executable(${NB_CURRENT_MODULE_NAME} ${NB_CURRENT_BUILD_HEADERS} ${NB_CURRENT_BUILD_SOURCES})
 set_target_properties(${NB_CURRENT_MODULE_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+
+# Dependency
+
+include_directories("${CMAKE_SOURCE_DIR}/modules/external/glfw/include")
+target_link_libraries(${NB_CURRENT_MODULE_NAME} "${CMAKE_SOURCE_DIR}/modules/external/glfw/lib/glfw3.lib")
+add_dependencies(${NB_CURRENT_MODULE_NAME} glfw)
