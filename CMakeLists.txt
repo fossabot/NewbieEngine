@@ -27,6 +27,3 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 add_subdirectory("cmake")
 add_subdirectory("modules")
 add_subdirectory(${NB_APPLICATION_NAME})
-
-# Set 'core' module as startup project
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT core)

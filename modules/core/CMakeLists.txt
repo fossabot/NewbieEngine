@@ -30,8 +30,14 @@ NB_FUNC_GROUP_SOURCE("${NB_CURRENT_BUILD_HEADERS_SOURCES}" "${CMAKE_CURRENT_LIST
 add_executable(${NB_CURRENT_MODULE_NAME} ${NB_CURRENT_BUILD_HEADERS} ${NB_CURRENT_BUILD_SOURCES})
 set_target_properties(${NB_CURRENT_MODULE_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
-# Dependency
+# Additional properties
+set_target_properties(${NB_CURRENT_MODULE_NAME} PROPERTIES FOLDER modules)
 
+if(MSVC)
+    set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT core)
+endif()
+
+# Dependency
 include_directories("${CMAKE_SOURCE_DIR}/modules/external/glfw/include")
 target_link_libraries(${NB_CURRENT_MODULE_NAME} "${CMAKE_SOURCE_DIR}/modules/external/glfw/lib/glfw3.lib")
 add_dependencies(${NB_CURRENT_MODULE_NAME} glfw)
