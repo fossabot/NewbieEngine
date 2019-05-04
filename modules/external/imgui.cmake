@@ -24,4 +24,4 @@ ExternalProject_Add( imgui PREFIX imgui
     LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
 )
 
-set_target_properties(imgui PROPERTIES FOLDER externals)
+set_target_properties(imgui PROPERTIES FOLDER modules/externals)
