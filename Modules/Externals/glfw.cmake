@@ -6,7 +6,7 @@ ExternalProject_Add( glfw PREFIX glfw
     GIT_REPOSITORY https://github.com/glfw/glfw.git
     GIT_TAG 3.3
 
-    INSTALL_DIR "${CMAKE_SOURCE_DIR}/modules/external/glfw"
+    INSTALL_DIR "${CMAKE_SOURCE_DIR}/Modules/Externals/glfw"
     
     # Skip build command.
     BUILD_COMMAND ""    
@@ -28,4 +28,4 @@ ExternalProject_Add( glfw PREFIX glfw
     LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
 )
 
-set_target_properties(glfw PROPERTIES FOLDER modules/externals)
+set_target_properties(glfw PROPERTIES FOLDER Modules/Externals)

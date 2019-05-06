@@ -35,4 +35,4 @@ add_custom_command(TARGET ${NB_CURRENT_MODULE_NAME} PRE_BUILD
 # Add dependency to core
 # ** Core moduls has dependenct on project  ** 
 # ** Without dependency, custom command of project module never called **
-add_dependencies(core ${NB_CURRENT_MODULE_NAME})
+add_dependencies(Core ${NB_CURRENT_MODULE_NAME})

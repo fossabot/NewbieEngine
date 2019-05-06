@@ -25,5 +25,5 @@ set(NB_APPLICATION_NAME "project")
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 add_subdirectory("CMake")
-add_subdirectory("modules")
+add_subdirectory("Modules")
 add_subdirectory(${NB_APPLICATION_NAME})

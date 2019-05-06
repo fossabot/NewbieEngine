@@ -1,15 +1,15 @@
 # Newbie engine core module.
 # Core module has program entry point.
 
-set(NB_CURRENT_MODULE_NAME "core")
+set(NB_CURRENT_MODULE_NAME "Core")
 
 # Header / Source container
 set(NB_CURRENT_BUILD_HEADERS)
 set(NB_CURRENT_BUILD_SOURCES)
 
 # Appending Header / Source in current directory
-add_subdirectory("runtime")
-add_subdirectory("editor")
+add_subdirectory("Runtime")
+add_subdirectory("Editor")
 
 file(GLOB NB_HEADERS_IN_CURRENT_DIR "${CMAKE_CURRENT_LIST_DIR}/*.h")
 set(NB_CURRENT_BUILD_HEADERS ${NB_HEADERS_IN_CURRENT_DIR} ${NB_CURRENT_BUILD_HEADERS})
@@ -31,13 +31,13 @@ add_executable(${NB_CURRENT_MODULE_NAME} ${NB_CURRENT_BUILD_HEADERS} ${NB_CURREN
 set_target_properties(${NB_CURRENT_MODULE_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
 # Additional properties
-set_target_properties(${NB_CURRENT_MODULE_NAME} PROPERTIES FOLDER modules)
+set_target_properties(${NB_CURRENT_MODULE_NAME} PROPERTIES FOLDER Modules)
 
 if(MSVC)
-    set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT core)
+    set_property(DIRECTORY ${CMAKE_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${NB_CURRENT_MODULE_NAME})
 endif()
 
 # Dependency
-include_directories("${CMAKE_SOURCE_DIR}/modules/external/glfw/include")
-target_link_libraries(${NB_CURRENT_MODULE_NAME} "${CMAKE_SOURCE_DIR}/modules/external/glfw/lib/glfw3.lib")
+include_directories("${CMAKE_SOURCE_DIR}/Modules/Externals/glfw/include")
+target_link_libraries(${NB_CURRENT_MODULE_NAME} "${CMAKE_SOURCE_DIR}/Modules/Externals/glfw/lib/glfw3.lib")
 add_dependencies(${NB_CURRENT_MODULE_NAME} glfw)

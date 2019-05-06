@@ -20,6 +20,6 @@ CMakeBuild/
 .vscode
 
 # Exclude external module files except cmake related
-modules/external/*
-!modules/external/CMakeLists.txt
-!modules/external/*.cmake
+Modules/Externals/*
+!Modules/Externals/CMakeLists.txt
+!Modules/Externals/*.cmake
