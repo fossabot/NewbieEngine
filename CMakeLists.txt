@@ -24,6 +24,6 @@ add_compile_definitions("$<$<CONFIG:NB3_Release>:NB_RELEASE=3>")
 set(NB_APPLICATION_NAME "project")
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-add_subdirectory("cmake")
+add_subdirectory("CMake")
 add_subdirectory("modules")
 add_subdirectory(${NB_APPLICATION_NAME})
