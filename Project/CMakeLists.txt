@@ -1,15 +1,15 @@
 # Newbie engine project module.
 # Project module is non-compiled module. But has custom command.
 
-set(NB_CURRENT_MODULE_NAME "project")
+set(NB_CURRENT_MODULE_NAME ${NB_APPLICATION_NAME})
 
 # Header / Source container
 set(NB_CURRENT_BUILD_HEADERS)
 set(NB_CURRENT_BUILD_SOURCES)
 
 # Appending Header / Source in current directory
-add_subdirectory("runtime")
-add_subdirectory("editor")
+add_subdirectory("Runtime")
+add_subdirectory("Editor")
 
 file(GLOB NB_HEADERS_IN_CURRENT_DIR "${CMAKE_CURRENT_LIST_DIR}/*.h")
 set(NB_CURRENT_BUILD_HEADERS ${NB_HEADERS_IN_CURRENT_DIR} ${NB_CURRENT_BUILD_HEADERS})

@@ -21,7 +21,7 @@ set(CMAKE_EXE_LINKER_FLAGS_NB3_RELEASE ${CMAKE_EXE_LINKER_FLAGS_RELEASE})
 add_compile_definitions("$<$<CONFIG:NB3_Release>:NB_RELEASE=3>")
 # ~ Configuration type
 
-set(NB_APPLICATION_NAME "project")
+set(NB_APPLICATION_NAME "Project")
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 add_subdirectory("CMake")
