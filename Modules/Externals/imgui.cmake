@@ -1,27 +1,40 @@
 # imgui
 # Git repository : "https://github.com/ocornut/imgui
+# Drop-Down library
 
-ExternalProject_Add( imgui PREFIX imgui
-    GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
-    GIT_TAG "655ebe4eaff15a3996233f81885e1a3e218caab0"
+FetchContent_GetProperties(imgui)
+if(NOT imgui_POPULATED)
+    message(STATUS "Clone 'imgui' from [https://github.com/ocornut/imgui.git]")
+    FetchContent_Populate(imgui
+        QUIET
+        SUBBUILD_DIR "${FETCHCONTENT_BASE_DIR}/imgui/subbuild"
+        SOURCE_DIR "${FETCHCONTENT_BASE_DIR}/imgui/src"
+        BINARY_DIR "${FETCHCONTENT_BASE_DIR}/imgui/build"
+        GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
+        GIT_TAG "4158cba1ffd338c46d52164c2be0762031e66f53"
+    )
+    message(STATUS "Clone 'imgui' Done")
 
-    INSTALL_DIR "${CMAKE_SOURCE_DIR}/Modules/Externals/imgui"
-    
-    # Skip build command.
-    BUILD_COMMAND ""
+    if(EXISTS "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui")
+        file(REMOVE "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui")
+    endif()
 
-    # Skip configure command.
-    CONFIGURE_COMMAND ""
+    file(GLOB NB_FETCH_CONTENT_HEADERS "${FETCHCONTENT_BASE_DIR}/imgui/src/*.h")
+    file(GLOB NB_FETCH_CONTENT_SOURCES "${FETCHCONTENT_BASE_DIR}/imgui/src/*.cpp")
+    file(COPY ${NB_FETCH_CONTENT_HEADERS} ${NB_FETCH_CONTENT_SOURCES} DESTINATION "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui/Sources/imgui")
+endif()
 
-    INSTALL_COMMAND
-        COMMAND ${CMAKE_COMMAND} -E echo "INSTALL_COMMAND (imgui)"
-        COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui"
-        COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_BINARY_DIR}/${NB_EXTERNAL_DIR}/imgui/src/imgui" "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui/include/imgui"
+# Get list of header and source of imgui
+# headers[out]      List of imgui header file
+# sources[out]      List of imgui source file
+function(NB_FUNC_EXTERNAL_MODULE_IMGUI include headers sources)
+    file(GLOB NB_EXTERNAL_MODULE_HEADERS "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui/Sources/imgui/*.h")
+    file(GLOB NB_EXTERNAL_MODULE_SOURCES "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui/Sources/imgui/*.cpp")
 
-    CMAKE_ARGS
-        "-DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>"
+    NB_FUNC_GROUP_SOURCE_WITH_TAIL("${NB_EXTERNAL_MODULE_HEADERS}" "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui/Sources" "Externals")
+    NB_FUNC_GROUP_SOURCE_WITH_TAIL("${NB_EXTERNAL_MODULE_SOURCES}" "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui/Sources" "Externals")
 
-    LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
-)
-
-set_target_properties(imgui PROPERTIES FOLDER Modules/Externals)
+    set(${include} "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui/Sources" PARENT_SCOPE)
+    set(${headers} ${NB_EXTERNAL_MODULE_HEADERS} PARENT_SCOPE)
+    set(${sources} ${NB_EXTERNAL_MODULE_SOURCES} PARENT_SCOPE)
+endfunction()
