@@ -1,4 +1,12 @@
 # Newbie engine modules
+include(ExternalProject)
+include(FetchContent)
+
+# Hide 'FetchContent' module related variables from GUI
+unset(FETCHCONTENT_BASE_DIR CACHE)
+unset(FETCHCONTENT_FULLY_DISCONNECTED CACHE)
+unset(FETCHCONTENT_QUIET CACHE)
+unset(FETCHCONTENT_UPDATES_DISCONNECTED CACHE)
 
 NB_MACRO_GET_SUBDIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR} SUBDIRS)
 
