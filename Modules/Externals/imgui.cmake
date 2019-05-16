@@ -14,9 +14,9 @@ ExternalProject_Add( imgui PREFIX imgui
     CONFIGURE_COMMAND ""
 
     INSTALL_COMMAND
-        ${CMAKE_COMMAND} -E copy_directory  
-        "${CMAKE_BINARY_DIR}/Modules/Externals/imgui/src/imgui" 
-        "${CMAKE_SOURCE_DIR}/Modules/Externals/imgui/include/imgui"
+        COMMAND ${CMAKE_COMMAND} -E echo "INSTALL_COMMAND (imgui)"
+        COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_BINARY_DIR}/${NB_EXTERNAL_DIR}/imgui/src/imgui" "${CMAKE_SOURCE_DIR}/${NB_EXTERNAL_DIR}/imgui/include/imgui"
 
     CMAKE_ARGS
         "-DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>"
