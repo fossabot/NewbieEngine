@@ -1,5 +1,4 @@
 ﻿cmake_minimum_required(VERSION 3.6)
-include(externalproject)
 
 # Project name
 set(NB_CMAKE_PROJECT_NAME "NewbieEngine")
