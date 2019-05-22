@@ -2,25 +2,25 @@
 # Git repository : "https://github.com/ocornut/imgui
 # Drop-Down library
 
+message(STATUS "Clone 'imgui' from [https://github.com/ocornut/imgui.git]")
+
+FetchContent_Populate(imgui
+    QUIET
+    GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
+    GIT_TAG "4158cba1ffd338c46d52164c2be0762031e66f53"
+)
+
+message(STATUS "Clone 'imgui' Done")
+
 FetchContent_GetProperties(imgui)
 if(NOT imgui_POPULATED)
-    message(STATUS "Clone 'imgui' from [https://github.com/ocornut/imgui.git]")
-    FetchContent_Populate(imgui
-        QUIET
-        # SUBBUILD_DIR "${FETCHCONTENT_BASE_DIR}/imgui/subbuild"
-        # SOURCE_DIR "${FETCHCONTENT_BASE_DIR}/imgui/src"
-        # BINARY_DIR "${FETCHCONTENT_BASE_DIR}/imgui/build"
-        GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
-        GIT_TAG "4158cba1ffd338c46d52164c2be0762031e66f53"
-    )
-    message(STATUS "Clone 'imgui' Done")
-
     if(EXISTS "${CMAKE_SOURCE_DIR}/${NB_MODULE_EXTERNAL_DIR}/imgui")
         file(REMOVE "${CMAKE_SOURCE_DIR}/${NB_MODULE_EXTERNAL_DIR}/imgui")
     endif()
 
-    file(GLOB NB_FETCH_CONTENT_HEADERS "${FETCHCONTENT_BASE_DIR}/imgui/src/*.h")
-    file(GLOB NB_FETCH_CONTENT_SOURCES "${FETCHCONTENT_BASE_DIR}/imgui/src/*.cpp")
+    # message(STATUS ${${imgui_SOURCE_DIR}})
+    file(GLOB NB_FETCH_CONTENT_HEADERS "${imgui_SOURCE_DIR}/*.h")
+    file(GLOB NB_FETCH_CONTENT_SOURCES "${imgui_SOURCE_DIR}/*.cpp")
     file(COPY ${NB_FETCH_CONTENT_HEADERS} ${NB_FETCH_CONTENT_SOURCES} DESTINATION "${CMAKE_SOURCE_DIR}/${NB_MODULE_EXTERNAL_DIR}/imgui/Sources/imgui")
 endif()
 
