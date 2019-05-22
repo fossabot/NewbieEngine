@@ -1,0 +1,16 @@
+buildType:
+  default: development
+  description : NewbieEngine build type
+  choices:
+    development:
+      short: Development
+      long: Development version
+      buildType: NB1_Development
+    debug:
+      short: Debug
+      long: Debug version
+      buildType: NB2_Debug
+    release:
+      short: Release
+      long: Release version
+      buildType: NB3_Release
