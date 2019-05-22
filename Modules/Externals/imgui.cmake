@@ -7,9 +7,9 @@ if(NOT imgui_POPULATED)
     message(STATUS "Clone 'imgui' from [https://github.com/ocornut/imgui.git]")
     FetchContent_Populate(imgui
         QUIET
-        SUBBUILD_DIR "${FETCHCONTENT_BASE_DIR}/imgui/subbuild"
-        SOURCE_DIR "${FETCHCONTENT_BASE_DIR}/imgui/src"
-        BINARY_DIR "${FETCHCONTENT_BASE_DIR}/imgui/build"
+        # SUBBUILD_DIR "${FETCHCONTENT_BASE_DIR}/imgui/subbuild"
+        # SOURCE_DIR "${FETCHCONTENT_BASE_DIR}/imgui/src"
+        # BINARY_DIR "${FETCHCONTENT_BASE_DIR}/imgui/build"
         GIT_REPOSITORY "https://github.com/ocornut/imgui.git"
         GIT_TAG "4158cba1ffd338c46d52164c2be0762031e66f53"
     )
