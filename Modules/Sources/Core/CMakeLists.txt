@@ -27,6 +27,7 @@ NB_FUNC_GROUP_SOURCE("${NB_CURRENT_BUILD_HEADERS_SOURCES}" "${CMAKE_CURRENT_LIST
 # imgui
 NB_FUNC_EXTERNAL_MODULE_IMGUI(NB_EXTERNAL_INCLUDE_IMGUI NB_EXTERNAL_HEADERS_IMGUI NB_EXTERNAL_SOURCES_IMGUI)
 
+
 # Make module
 add_executable(${NB_CURRENT_MODULE_NAME} 
     ${NB_CURRENT_BUILD_HEADERS} ${NB_CURRENT_BUILD_SOURCES}
@@ -43,8 +44,19 @@ endif()
 
 # GLFW
 include_directories("${CMAKE_SOURCE_DIR}/Modules/Externals/glfw/include")
-target_link_libraries(${NB_CURRENT_MODULE_NAME} "${CMAKE_SOURCE_DIR}/Modules/Externals/glfw/lib/glfw3.lib")
+target_link_libraries(${NB_CURRENT_MODULE_NAME} "${CMAKE_SOURCE_DIR}/Modules/Externals/glfw/lib/glfw3dll.lib")
+add_custom_command(TARGET ${NB_CURRENT_MODULE_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/Modules/Externals/glfw/bin/glfw3.dll" "${CMAKE_BINARY_DIR}/Output"
+)
+
 add_dependencies(${NB_CURRENT_MODULE_NAME} glfw)
 
 # imgui
 include_directories(${NB_EXTERNAL_INCLUDE_IMGUI})
+
+set_target_properties( ${NB_CURRENT_MODULE_NAME}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Modules/Outputs/$<CONFIG>/${NB_CURRENT_MODULE_NAME}"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Modules/Outputs/$<CONFIG>/${NB_CURRENT_MODULE_NAME}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Modules/Outputs/$<CONFIG>/${NB_CURRENT_MODULE_NAME}"
+)

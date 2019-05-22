@@ -23,3 +23,6 @@ CMakeBuild/
 Modules/Externals/*
 !Modules/Externals/CMakeLists.txt
 !Modules/Externals/*.cmake
+
+# Exclude module build output
+Modules/Outputs

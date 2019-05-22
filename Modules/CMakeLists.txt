@@ -8,14 +8,9 @@ unset(FETCHCONTENT_FULLY_DISCONNECTED CACHE)
 unset(FETCHCONTENT_QUIET CACHE)
 unset(FETCHCONTENT_UPDATES_DISCONNECTED CACHE)
 
-set(NB_EXTERNAL_DIR "Modules/Externals")
+set(NB_MODULE_EXTERNAL_DIR "Modules/Externals")
+set(NB_MODULE_SOURCE_DIR "Modules/Sources")
+set(NB_MODULE_OUTPUT_DIR "Modules/Outputs")
 
-NB_MACRO_GET_SUBDIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR} SUBDIRS)
-
-# External modules must be include earlier
-list(REMOVE_ITEM SUBDIRS "Externals")
 add_subdirectory("Externals")
-
-FOREACH(SUBDIR ${SUBDIRS})
-    add_subdirectory(${SUBDIR})
-ENDFOREACH()
+add_subdirectory("Sources")

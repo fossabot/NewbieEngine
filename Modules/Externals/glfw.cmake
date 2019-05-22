@@ -2,11 +2,20 @@
 # Official website : https://www.glfw.org/
 # Git repository : https://github.com/glfw/glfw
 
+# GLFW can build static or shared version
+# Static version
+#   - ./include/GLFW
+#   - ./lib/glfw3.[lib or a]
+# Shared version
+#   - ./include/GLFW
+#   - ./lib/glfw3dll.[lib or a]
+#   - ./bin/glfw3.[dll or so]
+
 ExternalProject_Add( glfw PREFIX glfw
     GIT_REPOSITORY https://github.com/glfw/glfw.git
     GIT_TAG 3.3
 
-    INSTALL_DIR "${CMAKE_SOURCE_DIR}/Modules/Externals/glfw"
+    INSTALL_DIR "${CMAKE_SOURCE_DIR}/${NB_MODULE_EXTERNAL_DIR}/glfw"
     
     # Skip build command.
     BUILD_COMMAND ""    
@@ -18,6 +27,7 @@ ExternalProject_Add( glfw PREFIX glfw
         "-DGLFW_BUILD_EXAMPLES=OFF"
         "-DGLFW_BUILD_TESTS=OFF"
         "-DGLFW_BUILD_DOCS=OFF"
+        "-DBUILD_SHARED_LIBS=ON"
 
     INSTALL_COMMAND
         ${CMAKE_COMMAND}
@@ -28,4 +38,4 @@ ExternalProject_Add( glfw PREFIX glfw
     LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
 )
 
-set_target_properties(glfw PROPERTIES FOLDER Modules/Externals)
+set_target_properties(glfw PROPERTIES FOLDER ${NB_MODULE_EXTERNAL_DIR})
