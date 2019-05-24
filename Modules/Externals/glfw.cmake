@@ -11,6 +11,8 @@
 #   - ./lib/glfw3dll.[lib or a]
 #   - ./bin/glfw3.[dll or so]
 
+NB_STATIC_LIBRARY_FILE_NAME("glfw3dll" NB_GLFW_STATIC_LIB)
+
 ExternalProject_Add( glfw PREFIX glfw
     GIT_REPOSITORY https://github.com/glfw/glfw.git
     GIT_TAG 3.3
@@ -35,6 +37,8 @@ ExternalProject_Add( glfw PREFIX glfw
         --target install
         --config Release
     
+    BUILD_BYPRODUCTS "<INSTALL_DIR>/lib/${NB_GLFW_STATIC_LIB}"
+
     LOG_DOWNLOAD 1 LOG_UPDATE 1 LOG_CONFIGURE 1 LOG_BUILD 1 LOG_INSTALL 1
 )
 

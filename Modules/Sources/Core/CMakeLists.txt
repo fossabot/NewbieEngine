@@ -51,7 +51,7 @@ add_dependencies(${NB_CURRENT_MODULE_NAME} glfw)
 include_directories("${CMAKE_SOURCE_DIR}/${NB_MODULE_EXTERNAL_DIR}/glfw/include")
 target_link_libraries(${NB_CURRENT_MODULE_NAME} "${CMAKE_SOURCE_DIR}/${NB_MODULE_EXTERNAL_DIR}/glfw/lib/glfw3dll.lib")
 add_custom_command(TARGET ${NB_CURRENT_MODULE_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/${NB_MODULE_EXTERNAL_DIR}/glfw/bin/glfw3.dll" "${CMAKE_SOURCE_DIR}"
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/${NB_MODULE_EXTERNAL_DIR}/glfw/bin/glfw3.dll" "${CMAKE_SOURCE_DIR}/Modules/Outputs/$<CONFIG>/${NB_CURRENT_MODULE_NAME}"
 )
 
 # imgui
