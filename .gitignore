@@ -26,3 +26,7 @@ Modules/Externals/*
 
 # Exclude module build output
 Modules/Outputs
+
+# Exclude generated files
+*.gen.h
+*.gen.cpp
