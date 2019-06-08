@@ -6,8 +6,13 @@
 
 set(NB_CURRENT_MODULE_NAME "NewbieEngine")
 
-# Library build as static/shared
-set(NB_MODULE_BUILD_SHARED FALSE)
+# **** Library build static/shared switching ****
+set(NB_MODULE_BUILD_SHARED TRUE)
+NB_STATIC_LIBRARY_FILE_NAME(${NB_CURRENT_MODULE_NAME} NB_MODULE_STATIC_LIBRARY_FILE_NAME)
+if(${NB_MODULE_BUILD_SHARED})
+    NB_SHARED_LIBRARY_FILE_NAME(${NB_CURRENT_MODULE_NAME} NB_MODULE_SHARED_LIBRARY_FILE_NAME)
+endif()
+# ~~~~ Library build static/shared switching ~~~~
 
 # **** Configuration ****
 
@@ -75,20 +80,34 @@ endif()
 include_directories("${CMAKE_CURRENT_LIST_DIR}/Public")
 include_directories("${CMAKE_CURRENT_LIST_DIR}/Private")
 
+# **** Build Output ****
+
 set_target_properties( ${NB_CURRENT_MODULE_NAME} PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Modules/Outputs/$<CONFIG>"
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Modules/Outputs/$<CONFIG>"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/Modules/Outputs/$<CONFIG>"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/${NB_MODULE_OUTPUT_DIR}/$<CONFIG>/Modules/${NB_CURRENT_MODULE_NAME}/Lib"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/${NB_MODULE_OUTPUT_DIR}/$<CONFIG>/Modules/${NB_CURRENT_MODULE_NAME}/Lib"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/${NB_MODULE_OUTPUT_DIR}/$<CONFIG>"
     LINKER_LANGUAGE CXX
     FOLDER Modules
 )
+
+add_custom_command(TARGET ${NB_CURRENT_MODULE_NAME} POST_BUILD
+    # Remove include directory in output module directory (Ignored if not exist)
+    COMMAND ${CMAKE_COMMAND} -E remove_directory
+    "${CMAKE_SOURCE_DIR}/${NB_MODULE_OUTPUT_DIR}/$<CONFIG>/Modules/${NB_CURRENT_MODULE_NAME}/Include/${NB_CURRENT_MODULE_NAME}"
+
+    # Copy include directory to output module directory
+    COMMAND ${CMAKE_COMMAND} -E copy_directory 
+    "${CMAKE_SOURCE_DIR}/${NB_MODULE_SOURCE_DIR}/${NB_CURRENT_MODULE_NAME}/Public"
+    "${CMAKE_SOURCE_DIR}/${NB_MODULE_OUTPUT_DIR}/$<CONFIG>/Modules/${NB_CURRENT_MODULE_NAME}/Include/${NB_CURRENT_MODULE_NAME}"
+)
+
+# ~~~~ Build Output ~~~~
 
 # **** Include External Drop-Down Modules ****
 
 include_directories(${NB_EXTERNAL_INCLUDE_IMGUI})   # imgui
 
 # ~~~~ Include External Drop-Down Modules ~~~~
-
 
 set(NB_MODULE_NEWBIE_ENGINE_SHARED_LIBRARY_REQUIREMENT)
 
